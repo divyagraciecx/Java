@@ -1,0 +1,41 @@
+/*
+A simple solution to iterate over a list using streams,
+keeping track of iteration using AtomicInteger
+Note that we can also achieve this using lambda functions
+*/
+
+import java.util.*;
+import java.util.stream.*;
+import java.util.concurrent.atomic.AtomicInteger;
+class  M20{
+  public static void main(String args[]){
+
+      List<Integer> li = new ArrayList<Integer>();
+      Scanner sc = new Scanner(System.in);
+      System.out.println("Enter the number of elements: ");
+      int limit = sc.nextInt();
+      while(limit-->0){
+        li.add(sc.nextInt());
+      }
+      StringBuilder res = new StringBuilder();
+      AtomicInteger index = new AtomicInteger();
+      Stream stream =  li.stream();
+      stream
+      .forEach(
+        num -> {
+          if((Integer)num%2 == 0){
+            res.append("e"+num);
+          }
+          else{
+            res.append("o"+num);
+          }
+          System.out.println("index "+li.indexOf(num));
+          if(index.incrementAndGet()<li.size()){
+            res.append(", ");
+          }
+
+        }
+      );
+  System.out.println(res);
+  }
+}
